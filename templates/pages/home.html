@@ -22,6 +22,17 @@
      
     </div>
 
+
+    <h1>Preguntas y Respuestas</h1>
+    <form method="post" enctype="multipart/form-data" action="{% url 'procesar_respuestas' %}">
+        {% csrf_token %}
+        {% for pregunta in preguntas %}
+            <p>{{ pregunta.pregunta }}</p>
+            <input type="text" name="respuesta_{{ pregunta.id }}">
+        {% endfor %}
+        <input type="submit" value="Enviar Respuestas">
+    </form>
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

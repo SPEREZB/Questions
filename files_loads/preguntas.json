@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "pregunta": "¿Cuál es la capital de Francia?",
+        "respuesta_correcta": "París"
+    },
+    {
+        "id": 2,
+        "pregunta": "¿En qué año se fundó la ONU?",
+        "respuesta_correcta": "1945"
+    },
+    {
+        "id": 3,
+        "pregunta": "¿Quién escribió 'Romeo y Julieta'?",
+        "respuesta_correcta": "William Shakespeare"
+    }
+]
