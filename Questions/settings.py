@@ -129,3 +129,10 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'  
+
+# Define la ruta de las carpetas de archivos estáticos (STATIC_URL) y archivos medios (MEDIA_URL) 
+MEDIA_URL = '/media/'
+
+# Configura la ruta del directorio donde se almacenarán los archivos estáticos
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+ 

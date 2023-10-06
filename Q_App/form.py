@@ -11,7 +11,7 @@ class UploadJSONForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.form_action = 'cargar_json'  # Nombre de la vista a la que deseas dirigir la solicitud
-        self.helper.add_input(Submit('submit', 'Enviar'))
+        self.helper.add_input(Submit('submit', 'Load'))
 
 class RespuestasForm(forms.Form):
     respuesta_1 = forms.CharField(

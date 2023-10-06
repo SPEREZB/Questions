@@ -1,0 +1,9 @@
+ .title{
+    text-align: center;
+    font-weight: 100; 
+    display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  font-family: 'Times New Roman', Times, serif; 
+ }
+ 
