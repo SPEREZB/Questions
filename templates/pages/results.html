@@ -1,0 +1,39 @@
+{% extends "base.html" %} 
+{% block Titulo %} Resultados{% endblock %}
+{% load static %}
+{% block contenido %}  
+ <div class="container-res radius"> 
+    <p class="score center-align flow-text result-title title teal-text">Your score is: {{ puntuacion }}</p>
+    <a class="gif2" href="{% url 'inicio' %}">
+        <img class="gif" src="{% static 'gifs/hogar.gif' %}" width="5%" />
+    </a>
+
+    <h2 class="center-align">ANSWERS:</h2>
+    <ul class="collection radius">
+        {% for pregunta in preguntas %}
+        <li class="collection-item">
+            <div class="row">
+                <div class="col s8">
+                    <span class="pregunta">{{ pregunta.pregunta }}</span>
+                </div>
+                <div class="col s4">
+                    {% with respuesta_usuario_1=respuestas_usuario.respuesta_1 respuesta_usuario_2=respuestas_usuario.respuesta_2 respuesta_usuario_3=respuestas_usuario.respuesta_3 %}
+                    {% if respuesta_usuario_1 == pregunta.respuesta_correcta %}
+                        <span class="new badge green" data-badge-caption="Respuesta 1 Correcta"></span>
+                    {% elif respuesta_usuario_2 == pregunta.respuesta_correcta %}
+                        <span class="new badge green" data-badge-caption="Respuesta 2 Correcta"></span>
+                    {% elif respuesta_usuario_3 == pregunta.respuesta_correcta %}
+                        <span class="new badge green" data-badge-caption="Respuesta 3 Correcta"></span>
+                    {% else %}
+                        <span class="new badge red" data-badge-caption="Respuesta incorrecta, la respuesta correcta es: {{ pregunta.respuesta_correcta }}">
+
+                        </span>
+                    {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div> 
+{% endblock %}

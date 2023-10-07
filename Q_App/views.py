@@ -25,7 +25,7 @@ def cargar_json(request):
                  for chunk in archivo_json.chunks():
                     file.write(chunk)
  
-                with open(ruta_archivo, 'r') as json_file:
+                with open(ruta_archivo, 'r', encoding='utf-8') as json_file:
                  preguntas = json.load(json_file)
                 
                 
@@ -42,35 +42,36 @@ def cargar_json(request):
  
 
 def procesar_respuestas(request):
-    if request.method == 'POST': 
-        form = RespuestasForm(request.POST)  
-        if form.is_valid():   
+    if request.method == 'POST':
+        form = RespuestasForm(request.POST)
+        if form.is_valid():
             respuestas_usuario = form.cleaned_data  # Obtén las respuestas del formulario
-            puntuacion = 0  # Inicializa la puntuación  
-            
+            print(respuestas_usuario) 
+            puntuacion = 0  # Inicializa la puntuación
+
             # Obtén las preguntas de contexto
-            preguntas = request.POST.getlist('pregunta')  # Asegúrate de que 'pregunta' sea el nombre correcto en tu HTML
-            with open("C:/Users/user/Desktop/APPS AND PAGES WEB/Django/Questions/files_loads/preguntas.json", 'r') as json_file:
-             preguntas = json.load(json_file)
-             
+            with open("C:/Users/user/Desktop/APPS AND PAGES WEB/Django/Questions/files_loads/preguntas.json", 'r', encoding='utf-8') as json_file:
+                preguntas = json.load(json_file)
+
+            # Listas para guardar respuestas correctas e incorrectas
+            respuestas_correctas = []
+            respuestas_incorrectas = []
+
             # Compara las respuestas del usuario con las respuestas correctas
-            for pregunta in preguntas: 
+            for pregunta in preguntas:
                 id_pregunta = pregunta['id']  # Convierte el id a cadena
                 respuesta_usuario = respuestas_usuario.get('respuesta_' + str(id_pregunta), '').strip()
-                respuesta_correcta = pregunta['respuesta_correcta'].strip() 
+                respuesta_correcta = pregunta['respuesta_correcta'].strip()
 
-                if respuesta_usuario.lower() == respuesta_correcta.lower(): 
+                if respuesta_usuario.lower() == respuesta_correcta.lower():
                     # La respuesta del usuario coincide con la respuesta correcta (sin distinguir mayúsculas/ minúsculas)
                     puntuacion += 1  # Aumenta la puntuación
+                    respuestas_correctas.append({'pregunta': pregunta['pregunta'], 'respuesta_correcta': respuesta_correcta})
+                else:
+                    respuestas_incorrectas.append({'pregunta': pregunta['pregunta'], 'respuesta_correcta': respuesta_correcta})
 
-            # Puedes realizar cualquier otro procesamiento necesario con la puntuación
-            # Por ejemplo, guardar la puntuación en la base de datos, generar un informe, etc.
-
-            # Redirige a una página de resultados o muestra la puntuación
-            print(puntuacion)
-            return render(request, 'pages/home.html', {'form': form,'puntuacion': puntuacion})     
-        else:
-            print('mal')
+            # Redirige al usuario a la página de resultados con la puntuación y las respuestas
+            return render(request, 'pages/results.html', {'respuestas_usuario':respuestas_usuario,'preguntas':preguntas,'puntuacion': puntuacion, 'respuestas_correctas': respuestas_correctas, 'respuestas_incorrectas': respuestas_incorrectas})
 
     # Si no se envió un formulario válido o no se envió un formulario POST, redirige a la página de inicio u otra página
     return redirect('inicio')
