@@ -2,18 +2,24 @@
 {% block Titulo %} Inicio{% endblock %}
 {% load static %}
 {% block contenido %}
+
+ 
 <div class="container">
-    <h2 class="title">CHOOSE FILE</h2>
+    <figure class="fig bl">
+        <img class="img" src="{% static 'img/pq.png' %}" />
+    </figure>
+
+    <h2 class="title">QUESTIONS AND ANSWER</h2>
     <div class="card card-w radius">
         <a class="gif" href="{% url 'inicio' %}">
-            <img class="gif" src="{% static 'gifs/hogar.gif' %}" width="5%" />
+            <img class="gif" src="{% static 'gifs/hogar.gif' %}" width="10%" />
         </a>
         <div class="card-content"> 
              
             <form method="post" enctype="multipart/form-data" action="{% url 'cargar_json' %}">
                 {% csrf_token %}
                 <div class="file-field input-field">
-                    <div class="btn">
+                    <div class="btn btn-bl">
                         <span>Choose File JSON</span>
                         <input type="file" id="file-input" name="archivo_json" accept=".json" />
                     </div>
@@ -21,14 +27,14 @@
                         <input class="file-path validate" type="text" />
                     </div>
                 </div>
-                <button class="btn waves-effect waves-light" type="submit" id="show-questions">
+                <button class="btn btn-bl waves-effect waves-light" type="submit" id="show-questions">
                     <i class="material-icons">LOAD</i>
                 </button>
             </form>
         </div>
     </div>
 
-    <div class="card card-w radius">
+    <div class="card card-w card-w-questions radius">
         <div class="card-content"> 
             <form id="preguntas-form" method="post" enctype="multipart/form-data" action="{% url 'procesar_respuestas' %}" class="hidden">
                 

@@ -18,12 +18,26 @@
     margin-top: 50px;
 }
 
+.btn-bl
+{
+    background-color: #121212;
+    color: azure;
+}
+
+.container-wh
+{
+    background-color: azure;
+}
+
 .card-w{
-    width: 500px;
-    margin-left: 25%; 
-    background-color: rgb(221, 244, 243);
+    width: 40%;
+    margin: 0 auto; /* Centrar horizontalmente */
+    background-color: rgb(241, 253, 255);
 }
  
+.card-w-questions{
+    margin-top: 20px;
+}
 
 .radius{
     border-radius: 40px;
@@ -32,15 +46,16 @@
     display: flex;
     justify-content: center; /* Centrar horizontalmente */
     align-items: center; /* Centrar verticalmente */
-    min-height: 100vh; /* Al menos el 100% del alto de la ventana */
+    min-height: 100%; /* Al menos el 100% del alto de la ventana */
     color: aliceblue;
 }
  
 
 .container-res{
     width: 1000px;
-    background-color: rgb(221, 244, 243);
+    background-color: rgb(241, 253, 255);
     margin-bottom: 200px;
+    color: #121212;
 }
 
 .bl{
@@ -59,4 +74,9 @@
     position: relative;
     left: 10px;
     top: -130px;
+}
+ 
+.img{ 
+   width: 20%;
+   margin-left: 35%;
 }
